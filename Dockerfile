@@ -4,8 +4,8 @@ LABEL maintainer="jfirles@siptize.com"
 LABEL "com.siptize.vendor"="Siptize S.L."
 LABEL "com.siptize.project"="common"
 LABEL "com.siptize.app"="postfix"
-LABEL "com.siptize.version"="1.0.0"
-LABEL version="1.0.0"
+LABEL "com.siptize.version"="1.0.1"
+LABEL version="1.0.1"
 
 ## zona horaria
 RUN echo "Europe/Madrid" > /etc/timezone

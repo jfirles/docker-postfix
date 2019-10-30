@@ -24,7 +24,12 @@ sed -i "s#^mynetworks.*#mynetworks = 127.0.0.0/8 [::ffff:127.0.0.0]/104 [::1]/12
 
 HOSTNAME=$(echo $SMTP_SERVER_DOMAIN | awk -F"." '{print $1}')
 ## cambiamos el mydestination
-sed -i "s#mydestination.*#mydestination = \$myhostname, /etc/mailname, $HOSTNAME, localhost.localdomain, localhost#g" /etc/postfix/main.cf
+MYDESTINATION="\$myhostname, /etc/mailname, $HOSTNAME, localhost.localdomain, localhost"
+if [ ! -z "$SMTP_OTHER_DOMAINS" ];then
+	TMP_DOMAINS=$(echo $SMTP_OTHER_DOMAINS | sed 's/:/, /g')
+	MYDESTINATION="$MYDESTINATION, $TMP_DOMAINS"
+fi
+sed -i "s#mydestination.*#mydestination = $MYDESTINATION#g" /etc/postfix/main.cf
 
 ## creamos el aliases
 echo "postmaster:    root" > /etc/aliases
