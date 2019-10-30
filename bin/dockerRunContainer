@@ -7,8 +7,8 @@ VERSION=$(cat Dockerfile | grep "LABEL version" | awk -F"\"" '{print $2}')
 
 ### valores auto seteados
 IMAGE_NAME=$PROJECT_NAME-$APP_NAME
-CONTAINER_NAME=$PROJECT_NAME-$APP_NAME-pg1-devel
+CONTAINER_NAME=$PROJECT_NAME-$APP_NAME-devel
 
 ### ejecucion
-docker run --rm --name $CONTAINER_NAME --hostname mail1.siptize.com --env-file docker_env.file --network oficina_net --ip 192.168.33.34 -it siptize/$IMAGE_NAME:$VERSION
+docker run --rm --name $CONTAINER_NAME --hostname mail1.mydomain.com --env-file docker_env.file --network oficina_net --ip 192.168.33.34 -it siptize/$IMAGE_NAME:$VERSION
 
