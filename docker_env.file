@@ -1,3 +1,4 @@
-SMTP_SERVER_DOMAIN=mydomain.com
+SMTP_SERVER_DOMAIN=mail1.mydomain.com
 SMTP_ALLOWED_RELAY=192.168.2.0/24:192.168.3.0/24
 POSTMASTER_EMAIL=postmaster@mydomain.com
+SMTP_OTHER_DOMAINS=other.com:another.net
