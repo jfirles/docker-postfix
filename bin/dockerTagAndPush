@@ -1,0 +1,28 @@
+#!/bin/bash
+
+## cogemos los valores del Dockerfile
+PROJECT_NAME=$(cat Dockerfile | grep "com.siptize.project" | awk -F"\"" '{print $4}')
+APP_NAME=$(cat Dockerfile | grep "com.siptize.app" | awk -F"\"" '{print $4}')
+VERSION=$(cat Dockerfile | grep "LABEL version" | awk -F"\"" '{print $2}')
+
+### valores auto seteados
+IMAGE_NAME=$PROJECT_NAME-$APP_NAME
+
+## nombre con la version
+LOCAL_IMAGE=siptize/$IMAGE_NAME:$VERSION
+
+## nombre en el registry
+REGISTRY_IMAGE_NAME=josefu/postfix-internal:$VERSION
+
+## tageamos
+docker tag $LOCAL_IMAGE $REGISTRY_IMAGE_NAME
+
+## hacemos el push
+echo "Hacer el push de la imagen $REGISTRY_IMAGE_NAME? y/n"
+read YESNO
+
+if [ "$YESNO" == "y" ];then
+        docker push $REGISTRY_IMAGE_NAME
+else
+        echo "Cancelado el push."
+fi
